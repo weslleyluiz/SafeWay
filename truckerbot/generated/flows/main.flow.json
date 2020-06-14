@@ -1,0 +1,139 @@
+{
+  "version": "0.1",
+  "catchAll": {
+    "onReceive": [],
+    "next": [
+      {
+        "condition": "event.nlu.intent.is('forget')",
+        "node": "forget-my-name"
+      }
+    ]
+  },
+  "startNode": "entry",
+  "nodes": [
+    {
+      "id": "7099199f90",
+      "name": "first-time",
+      "next": [
+        {
+          "condition": "age <= 0",
+          "node": "ageCheck"
+        },
+        {
+          "condition": "otherwise",
+          "node": "profiler"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-0ATo0S",
+        "setUserVariable {\"name\":\"age\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "c69ee2d71f",
+      "name": "many-times",
+      "next": [],
+      "onEnter": [
+        "say #!builtin_text-bFsOmf"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "4f50a2e9fd",
+      "name": "forget-my-name",
+      "next": [],
+      "onEnter": [
+        "say #!builtin_text-TtzrCV",
+        "resetUserVariable {\"name\":\"nickname\"}",
+        "say #!builtin_text-kKQ8C3"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "a54a82eb7c",
+      "name": "entry",
+      "onEnter": [
+        "say #!builtin_text-u6__Ry",
+        "getUserVariable {\"name\":\"nickname\",\"output\":\"$r\"}",
+        "getGlobalVariable {\"name\":\"userExists\",\"output\":\"$u\"}",
+        "setGlobalVariable {\"name\":\"$u\",\"value\":\"false\",\"expiry\":\"never\"}"
+      ],
+      "onReceive": null,
+      "next": [
+        {
+          "condition": "true",
+          "node": "ask-name"
+        },
+        {
+          "condition": "state.$u === true",
+          "node": "many-times"
+        }
+      ]
+    },
+    {
+      "id": "d29fc6b771",
+      "name": "ask-name",
+      "next": [
+        {
+          "condition": "true",
+          "node": "first-time"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-z0J9qh"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"nickname\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"nickname\",\"output\":\"$r\"}"
+      ]
+    },
+    {
+      "id": "437a194967",
+      "name": "profiler",
+      "next": [
+        {
+          "condition": "state.$r <== 0",
+          "node": "heigthCheck"
+        },
+        {
+          "condition": "state.$r >== 0",
+          "node": "many-times"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-l33g~q",
+        "setUserVariable {\"name\":\"heigth\",\"value\":\"\",\"expiry\":\"never\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "027d206c01",
+      "name": "ageCheck",
+      "next": [
+        {
+          "condition": "true",
+          "node": "first-time"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-jF35XR"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "edc3d490e7",
+      "name": "heigthCheck",
+      "next": [
+        {
+          "condition": "true",
+          "node": "profiler"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-mG_wUP"
+      ],
+      "onReceive": null
+    }
+  ]
+}
