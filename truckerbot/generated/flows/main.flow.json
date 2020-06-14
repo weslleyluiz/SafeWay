@@ -12,34 +12,6 @@
   "startNode": "entry",
   "nodes": [
     {
-      "id": "7099199f90",
-      "name": "first-time",
-      "next": [
-        {
-          "condition": "age <= 0",
-          "node": "ageCheck"
-        },
-        {
-          "condition": "otherwise",
-          "node": "profiler"
-        }
-      ],
-      "onEnter": [
-        "say #!builtin_text-0ATo0S",
-        "setUserVariable {\"name\":\"age\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}"
-      ],
-      "onReceive": null
-    },
-    {
-      "id": "c69ee2d71f",
-      "name": "many-times",
-      "next": [],
-      "onEnter": [
-        "say #!builtin_text-bFsOmf"
-      ],
-      "onReceive": null
-    },
-    {
       "id": "4f50a2e9fd",
       "name": "forget-my-name",
       "next": [],
@@ -56,18 +28,17 @@
       "onEnter": [
         "say #!builtin_text-u6__Ry",
         "getUserVariable {\"name\":\"nickname\",\"output\":\"$r\"}",
-        "getGlobalVariable {\"name\":\"userExists\",\"output\":\"$u\"}",
-        "setGlobalVariable {\"name\":\"$u\",\"value\":\"false\",\"expiry\":\"never\"}"
+        "getGlobalVariable {\"name\":\"userExists\",\"output\":\"$u\"}"
       ],
       "onReceive": null,
       "next": [
         {
-          "condition": "true",
-          "node": "ask-name"
+          "condition": "state.$u === true",
+          "node": "routine.flow.json"
         },
         {
-          "condition": "state.$u === true",
-          "node": "many-times"
+          "condition": "true",
+          "node": "ask-name"
         }
       ]
     },
@@ -87,25 +58,6 @@
         "setUserVariable {\"name\":\"nickname\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
         "getUserVariable {\"name\":\"nickname\",\"output\":\"$r\"}"
       ]
-    },
-    {
-      "id": "437a194967",
-      "name": "profiler",
-      "next": [
-        {
-          "condition": "state.$r <== 0",
-          "node": "heigthCheck"
-        },
-        {
-          "condition": "state.$r >== 0",
-          "node": "many-times"
-        }
-      ],
-      "onEnter": [
-        "say #!builtin_text-l33g~q",
-        "setUserVariable {\"name\":\"heigth\",\"value\":\"\",\"expiry\":\"never\"}"
-      ],
-      "onReceive": null
     },
     {
       "id": "027d206c01",
@@ -134,6 +86,50 @@
         "say #!builtin_text-mG_wUP"
       ],
       "onReceive": null
+    },
+    {
+      "id": "7099199f90",
+      "name": "first-time",
+      "next": [
+        {
+          "condition": "state.$a > 0",
+          "node": "profiler"
+        },
+        {
+          "condition": "otherwise",
+          "node": "ageCheck"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-0ATo0S"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"age\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"age\",\"output\":\"$a\"}"
+      ]
+    },
+    {
+      "id": "437a194967",
+      "name": "profiler",
+      "next": [
+        {
+          "condition": "state.$h > 0",
+          "node": "routine.flow.json"
+        },
+        {
+          "condition": "otherwise",
+          "node": "heigthCheck"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-l33g~q"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"heigth\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"heigth\",\"output\":\"$h\"}",
+        "setGlobalVariable {\"name\":\"userExists\",\"value\":\"true\",\"expiry\":\"never\"}",
+        "getGlobalVariable {\"name\":\"userExists\",\"output\":\"$u\"}"
+      ]
     }
   ]
 }

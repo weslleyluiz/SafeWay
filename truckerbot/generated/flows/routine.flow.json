@@ -1,0 +1,106 @@
+{
+  "version": "0.1",
+  "catchAll": {},
+  "startNode": "entry",
+  "nodes": [
+    {
+      "id": "c363687c7f",
+      "name": "entry",
+      "onEnter": [
+        "say #!builtin_text-bFsOmf"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"statusUser\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"statusUser\",\"output\":\"$s\"}"
+      ],
+      "next": [
+        {
+          "condition": "state.$s.includes(\"bem\") || state.$s.includes(\"Bem\") || state.$s.includes(\"Legal\") || state.$s.includes(\"legal\")",
+          "node": "ok"
+        },
+        {
+          "condition": "otherwise",
+          "node": "not-ok"
+        }
+      ]
+    },
+    {
+      "id": "dcc5992190",
+      "name": "not-ok",
+      "next": [
+        {
+          "condition": "state.$u.includes(\"sim\") || state.$u.includes(\"Sim\") || state.$u.includes(\"já\") ",
+          "node": "checkStillDrinving"
+        },
+        {
+          "condition": "otherwise",
+          "node": "checkLunchLocation"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-GZlqOQ"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"lunch\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"lunch\",\"output\":\"$r\"}"
+      ]
+    },
+    {
+      "id": "6289de79f0",
+      "name": "ok",
+      "next": [],
+      "onEnter": [
+        "say #!builtin_text-W04U2~"
+      ],
+      "onReceive": []
+    },
+    {
+      "id": "50b01a7bf5",
+      "name": "checkLunchLocation",
+      "next": [
+        {
+          "condition": "state.$r.includes(\"Sim\") || state.$r.includes(\"Claro\") || state.$r.includes(\"sim\") ",
+          "node": "showLunchLocations"
+        },
+        {
+          "condition": "otherwise",
+          "node": "Desejo"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-aIkZ6A"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"checkLocation\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"checkLocation\",\"output\":\"$r\"}"
+      ]
+    },
+    {
+      "id": "4da636297a",
+      "name": "showLunchLocations",
+      "next": [],
+      "onEnter": [
+        "say #!builtin_card-8Av~2n"
+      ],
+      "onReceive": [
+        "wait {\"time\":\"50000\"}"
+      ]
+    },
+    {
+      "id": "4e654ab30b",
+      "name": "Desejo",
+      "next": [],
+      "onEnter": [],
+      "onReceive": null
+    },
+    {
+      "id": "9e8c2f9f2d",
+      "name": "checkStillDrinving",
+      "next": [],
+      "onEnter": [
+        "say #!builtin_text-3Nuvcd"
+      ],
+      "onReceive": null
+    }
+  ]
+}

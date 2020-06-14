@@ -130,5 +130,53 @@
     },
     "createdBy": "admin",
     "createdOn": "2020-06-13T23:12:48.458Z"
+  },
+  {
+    "id": "builtin_text-GZlqOQ",
+    "formData": {
+      "text": "Você já se alimentou hoje?",
+      "variations": [
+        "Você já comeu algum alimento hoje?"
+      ],
+      "typing": true
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-06-14T14:56:42.205Z"
+  },
+  {
+    "id": "builtin_text-W04U2~",
+    "formData": {
+      "text": "Excelente! Lembre-se de beber água e fazer pausas!",
+      "variations": [
+        "Ótimo! Não se esqueça de beber água e fazer pausas!"
+      ],
+      "typing": true
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-06-14T15:18:47.589Z"
+  },
+  {
+    "id": "builtin_text-aIkZ6A",
+    "formData": {
+      "text": "Que tal aproveitar e parar no posto mais próximo?",
+      "variations": [
+        "Deseja realizar uma parada no posto mais próximo? "
+      ],
+      "typing": true
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-06-14T15:36:45.031Z"
+  },
+  {
+    "id": "builtin_text-3Nuvcd",
+    "formData": {
+      "text": "Você já fez uma pausa para descanso?",
+      "variations": [
+        "Você já fez uma pausa ?"
+      ],
+      "typing": true
+    },
+    "createdBy": "admin",
+    "createdOn": "2020-06-14T16:02:10.708Z"
   }
 ]
